@@ -13,7 +13,7 @@ LDFLAGS=--Ttext=0x1000
 CFLAGS=-Wall -Wextra -Wpedantic -Werror -g -O2 -ffreestanding -m32 -fno-exceptions
 
 # first rule is run by default
-os_image.bin: boot/bootsect.bin kernel.bin
+lios.bin: boot/bootsect.bin kernel.bin
 	cat $^ > $@
 
 #
@@ -28,12 +28,14 @@ kernel.bin: boot/kernel_entry.o $(OBJ)
 kernel.elf: boot/kernel_entry.o $(OBJ)
 	$(LD) -o $@ $^ $(LDFLAGS)
 
-run: os_image.bin
+run: lios.bin
 	qemu-system-i386 -fda $<
 
+build: lios.bin
+
 # open the connection to qemu and load our kernel-object file with symbols
-debug: os_image.bin kernel.elf
-	qemu-system-i386 -s -fda os_image.bin -d guest_errors,int &
+debug: lios.bin kernel.elf
+	qemu-system-i386 -s -fda lios.bin -d guest_errors,int &
 	$(GDB) -ex "target remote localhost:1234" -ex "symbol-file kernel.elf"
 
 # generic rules for wildcards

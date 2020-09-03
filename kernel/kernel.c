@@ -20,7 +20,7 @@ void kmain() {
 
 void user_input(char* input) {
     char* end = "END";
-    char* page = "PAGE";
+    char* page = "ALLOC-PAGE";
     *page = 'P';
 
     if (strcmp(input, page) == 0) {
