@@ -1,6 +1,6 @@
 # lios
 
-![lios demo](demo.gf)
+![lios demo](demo.gif)
 
 This is a custom 32bit operating system made from scratch named `LIOS`.
 Its implementation is inspired by the renowned guide [OS Tutorial](https://github.com/cfenollosa/os-tutorial) that walks individuals through making their own OS from scratch.
